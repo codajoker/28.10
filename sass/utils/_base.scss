@@ -1,0 +1,84 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+span{
+    color: $accent-color;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+button,a,
+button:active,
+button:focus,
+input,
+input:active,
+input:focus,
+textarea,
+textarea:active,
+textarea:focus {
+    outline: none;
+        cursor: pointer;
+
+}
+button{
+    background: transparent;
+        border: none;
+        cursor: pointer;
+}
+.list {
+    list-style: none;
+}
+
+.link,a {
+    text-decoration: none;
+}
+
+
+body {
+    margin-left: 0;
+    margin-right: 0;
+    font-family: Inter, sans-serif;
+    color: $text;
+}
+
+.container {
+    padding: 0px 20px 0 20px;
+}
+img{
+    width: 100%;
+}
+.visually-hidden {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+}
+section{
+        background-color: $main-color;
+}

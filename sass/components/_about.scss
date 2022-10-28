@@ -1,0 +1,26 @@
+.about{
+&_image{
+    width: auto;
+}
+    padding-bottom: 50px;
+    position: relative;
+ &_container{
+    padding-left: 11px;
+    padding-right: 11px;
+ }
+ &_list{
+    &-item{
+        display: flex;
+        &:not(:last-child){
+           margin-bottom: 40px; 
+        }
+    }
+    &-text{
+        min-width: 250px;
+        margin-left: 30px;
+    font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+ }}
+
+}
