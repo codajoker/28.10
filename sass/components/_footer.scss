@@ -1,5 +1,13 @@
-footer{
+.footer{
     padding: 65px 40px 60px 37px ;
     background-color: $main-color;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    &_firma{
+        font-weight: 700;
+            font-size: 22px;
+            line-height: 27px;
+    } 
 }
