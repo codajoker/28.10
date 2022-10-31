@@ -96,3 +96,16 @@ img {
 section {
   background-color: $main-color;
 }
+button{
+  transition: background-color $main-duration $timing-function;}
+a{
+    transition: color $main-duration $timing-function;
+}
+button:hover{
+  background-color: $accent-color;
+  color: $main-color
+  
+}
+a:hover{
+  color: $accent-color;
+}
